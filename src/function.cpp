@@ -9,7 +9,7 @@ namespace func_gen {
 /**
  * Generates the C++ name for the function.
  */
-static std::string Function::unique_name(const std::string &name, const std::string &args) {
+/* static */ std::string Function::unique_name(const std::string &name, const std::string &args) {
     if (name == "operator+") {
         return "op_add_" + args;
     } else if (name == "operator-") {

@@ -13,6 +13,7 @@ namespace func_gen {
  * function once it is generated.
  */
 class Function {
+public:
     /**
      * Name of the function implementation as generated in the C++ file.
      */
@@ -30,18 +31,16 @@ class Function {
     const std::string cqasm_args;
 
 private:
-
     /**
      * Generates the C++ name for the function.
      */
     static std::string unique_name(const std::string &name, const std::string &args);
-public:
 
+public:
     /**
      * Constructs a normal function. name must be a valid identifier.
      */
     Function(const std::string &name, const std::string &args);
-
 };
 
 } // namespace func_gen
