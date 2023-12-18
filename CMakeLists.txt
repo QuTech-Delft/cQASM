@@ -20,7 +20,7 @@ target_include_directories(func-gen
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../include/"
 )
 
-target_compile_features(${PROJECT_NAME}_test PRIVATE
+target_compile_features(func-gen PRIVATE
     cxx_std_11
 )
 
