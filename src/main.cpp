@@ -1,4 +1,5 @@
 #include <iostream>  // cerr, endl
+#include <sstream>  // ostringstream
 
 #include "generator.hpp"  // Generator
 
