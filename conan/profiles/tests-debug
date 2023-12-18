@@ -1,0 +1,9 @@
+include(default)
+
+[settings]
+compiler.cppstd=17
+func-gen/*:build_type=Debug
+
+[options]
+func-gen/*:asan_enabled=True
+func-gen/*:build_tests=True
