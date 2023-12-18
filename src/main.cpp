@@ -1,3 +1,5 @@
+#include <iostream>  // cerr, endl
+
 #include "generator.hpp"  // Generator
 
 
