@@ -17,7 +17,7 @@ add_executable(func-gen)
 add_subdirectory(src)
 
 target_include_directories(func-gen
-    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/../include/"
+    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include/"
 )
 
 target_compile_features(func-gen PRIVATE
