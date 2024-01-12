@@ -3,7 +3,7 @@ import os
 from conan import ConanFile
 from conan.errors import ConanInvalidConfiguration
 from conan.tools.build import check_min_cppstd
-from conan.tools.cmake import CMakeToolchain, CMakeDeps, CMake
+from conan.tools.cmake import CMakeToolchain, CMakeDeps, CMake, cmake_layout
 from conan.tools.files import copy
 from conan.tools.scm import Version
 
@@ -19,7 +19,7 @@ class FuncgenConan(ConanFile):
     homepage = "https://github.com/QuTech-Delft/func-gen"
     url = "https://github.com/conan-io/conan-center-index"
     description = "Generator of functions usable within cQASM."
-    topics = ("code generation")
+    topics = "code generation"
 
     # Binary configuration
     settings = "os", "compiler", "build_type", "arch"
@@ -37,6 +37,9 @@ class FuncgenConan(ConanFile):
     exports = "version.py", "include/version.hpp"
     exports_sources = "CMakeLists.txt", "cmake/*", "include/*", "src/*"
 
+    def set_version(self):
+        self.version = get_version()
+
     def config_options(self):
         if self.settings.os == "Windows":
             del self.options.fPIC
@@ -46,14 +49,7 @@ class FuncgenConan(ConanFile):
             self.options.rm_safe("fPIC")
 
     def layout(self):
-        self.folders.source = "."
-        self.folders.build = os.path.join("build", str(self.settings.build_type))
-        self.folders.generators = os.path.join(self.folders.build, "generators")
-
-        self.cpp.package.libs = ["func-gen"]
-        self.cpp.package.includedirs = ["include"]
-
-        self.cpp.source.includedirs = ["include"]
+        cmake_layout(self, src_folder="src")
 
     def generate(self):
         deps = CMakeDeps(self)
@@ -72,16 +68,16 @@ class FuncgenConan(ConanFile):
         version = Version(self.settings.compiler.version)
         if compiler == "apple-clang":
             if version < "14":
-                raise ConanInvalidConfiguration("tree-gen requires at least apple-clang++ 14")
+                raise ConanInvalidConfiguration("func-gen requires at least apple-clang++ 14")
         elif compiler == "clang":
             if version < "13":
-                raise ConanInvalidConfiguration("tree-gen requires at least clang++ 13")
+                raise ConanInvalidConfiguration("func-gen requires at least clang++ 13")
         elif compiler == "gcc":
             if version < "10.0":
-                raise ConanInvalidConfiguration("tree-gen requires at least g++ 10.0")
+                raise ConanInvalidConfiguration("func-gen requires at least g++ 10.0")
         elif compiler == "msvc":
             if version < "19.29":
-                raise ConanInvalidConfiguration("tree-gen requires at least msvc 19.29")
+                raise ConanInvalidConfiguration("func-gen requires at least msvc 19.29")
         else:
             raise ConanInvalidConfiguration("Unsupported compiler")
         if compiler.get_safe("cppstd"):
