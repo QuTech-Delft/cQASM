@@ -3,14 +3,14 @@ import os
 from conan import ConanFile
 from conan.errors import ConanInvalidConfiguration
 from conan.tools.build import check_min_cppstd
-from conan.tools.cmake import CMakeToolchain, CMakeDeps, CMake, cmake_layout
+from conan.tools.cmake import CMakeToolchain, CMakeDeps, CMake
 from conan.tools.files import copy
 from conan.tools.scm import Version
 
 from version import get_version
 
 
-class FuncgenConan(ConanFile):
+class FuncGenConan(ConanFile):
     name = "func-gen"
     version = get_version()
 
@@ -49,7 +49,14 @@ class FuncgenConan(ConanFile):
             self.options.rm_safe("fPIC")
 
     def layout(self):
-        cmake_layout(self, src_folder="src")
+        self.folders.source = "."
+        self.folders.build = os.path.join("build", str(self.settings.build_type))
+        self.folders.generators = os.path.join(self.folders.build, "generators")
+
+        self.cpp.package.libs = ["func-gen"]
+        self.cpp.package.includedirs = ["include"]
+
+        self.cpp.source.includedirs = ["include"]
 
     def generate(self):
         deps = CMakeDeps(self)
