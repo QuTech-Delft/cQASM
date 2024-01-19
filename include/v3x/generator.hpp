@@ -32,7 +32,6 @@ class V3xGenerator : public Generator {
      *  - 'i': returns a ConstInt, return_expr must be a primitive::Int.
      *  - 'r': returns a ConstReal, return_expr must be a primitive::Real.
      *  - 'c': returns a ConstComplex, return_expr must be a primitive::Complex.
-     *  - 's': returns a ConstString, return_expr must be a primitive::Str.
      *  - 'X': returns a ConstBoolArray, return_expr must be a Many<ConstBool>.
      *  - 'Y': returns a ConstIntArray, return_expr must be a Many<ConstInt>.
      *  - 'Z': returns a ConstRealArray, return_expr must be a Many<ConstReal>.

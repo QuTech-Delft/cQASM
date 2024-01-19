@@ -25,7 +25,6 @@ void V3xGenerator::generate_const_impl_header(const Function &func) {
             case 'i': source_ofs_ << "->as_const_int()->value"; break;
             case 'r': source_ofs_ << "->as_const_real()->value"; break;
             case 'c': source_ofs_ << "->as_const_complex()->value"; break;
-            case 's': source_ofs_ << "->as_const_string()->value"; break;
             case 'X': source_ofs_ << "->as_const_bool_array()->value"; break;
             case 'Y': source_ofs_ << "->as_const_int_array()->value"; break;
             case 'Z': source_ofs_ << "->as_const_real_array()->value"; break;
@@ -46,7 +45,6 @@ void V3xGenerator::generate_const_impl_header(const Function &func) {
  *  - 'i': returns a ConstInt, return_expr must be a primitive::Int.
  *  - 'r': returns a ConstReal, return_expr must be a primitive::Real.
  *  - 'c': returns a ConstComplex, return_expr must be a primitive::Complex.
- *  - 's': returns a ConstString, return_expr must be a primitive::Str.
  *  - 'X': returns a ConstBoolArray, return_expr must be a Many<ConstBool>.
  *  - 'Y': returns a ConstIntArray, return_expr must be a Many<ConstInt>.
  *  - 'Z': returns a ConstRealArray, return_expr must be a Many<ConstReal>.
@@ -60,7 +58,6 @@ void V3xGenerator::generate_impl_footer(const std::string &return_expr, char ret
         case 'i': source_ofs_ << "ConstInt"; break;
         case 'r': source_ofs_ << "ConstReal"; break;
         case 'c': source_ofs_ << "ConstComplex"; break;
-        case 's': source_ofs_ << "ConstString"; break;
         case 'X': source_ofs_ << "ConstBoolArray"; break;
         case 'Y': source_ofs_ << "ConstIntArray"; break;
         case 'Z': source_ofs_ << "ConstRealArray"; break;
