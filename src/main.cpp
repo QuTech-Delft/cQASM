@@ -19,7 +19,6 @@ void generate_common_functions(func_gen::Generator* generator) {
     generator->generate_const_scalar_op("operator+", 'c', "cc", "a + b");
     generator->generate_const_scalar_op("operator+", 'r', "rr", "a + b");
     generator->generate_const_scalar_op("operator+", 'i', "ii", "a + b");
-    generator->generate_const_scalar_op("operator+", 's', "ss", "a + b");
     generator->generate_const_scalar_op("operator-", 'c', "cc", "a - b");
     generator->generate_const_scalar_op("operator-", 'r', "rr", "a - b");
     generator->generate_const_scalar_op("operator-", 'i', "ii", "a - b");
@@ -100,10 +99,17 @@ void generate_common_functions(func_gen::Generator* generator) {
 }
 
 
+void generate_v1x_specific_functions(func_gen::Generator* generator) {
+    // Basic scalar arithmetic operators
+    generator->generate_const_scalar_op("operator+", 's', "ss", "a + b");
+}
+
+
 void test_v1x(const std::string &header_file_path, const std::string &source_file_path) {
     std::unique_ptr<func_gen::Generator> generator{};
     generator = std::make_unique<func_gen::V1xGenerator>(header_file_path, source_file_path);
     generate_common_functions(generator.get());
+    generate_v1x_specific_functions(generator.get());
 }
 
 
