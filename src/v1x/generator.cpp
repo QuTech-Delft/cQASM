@@ -77,7 +77,21 @@ void V1xGenerator::generate_impl_footer(const std::string &return_expr, char ret
  * Constructs a v1x generator for the function table.
  */
 V1xGenerator::V1xGenerator(const std::string &header_filename, const std::string &source_filename)
-: Generator{ header_filename, source_filename, v1x_version }
-{}
+: Generator{ header_filename, source_filename, v1x_version } {
+    source_ofs_ << R"(
+/**
+ * Division that always rounds down (towards negative infinity), like Python's integer division.
+ * Because rounding to zero is a useless mechanic.
+ */
+static int64_t div_floor(int64_t a, int64_t b) {
+    int64_t res = a / b;
+    int64_t rem = a % b;
+    // Correct division result downwards if up-rounding happened,
+    // (for non-zero remainder of sign different than the divisor).
+    int64_t corr = (rem != 0 && ((rem < 0) != (b < 0)));
+    return res - corr;
+}
+)";
+}
 
 } // namespace func_gen

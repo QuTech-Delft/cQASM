@@ -15,7 +15,7 @@ namespace func_gen {
  */
 void V3xGenerator::generate_const_impl_header(const Function &func) {
     generate_impl_header(func);
-    source_ofs_ << "    values::check_const(v);" << std::endl;
+    source_ofs_ << "    values::check_const(v);\n";
     size_t index = 0;
     for (auto arg_typ : func.cqasm_args) {
         source_ofs_ << "    auto " << (char)('a' + index) << " = v[" << index << "]";
@@ -31,7 +31,7 @@ void V3xGenerator::generate_const_impl_header(const Function &func) {
             case 'I': source_ofs_ << "->as_index_ref()->value"; break;
             default: throw std::invalid_argument("unknown arg type");
         }
-        source_ofs_ << ";" << std::endl;
+        source_ofs_ << ";\n";
         index++;
     }
 }
@@ -64,8 +64,8 @@ void V3xGenerator::generate_impl_footer(const std::string &return_expr, char ret
         case 'I': source_ofs_ << "IndexRef"; break;
         default: throw std::invalid_argument("unknown type code");
     }
-    source_ofs_ << ">(" << return_expr << ");" << std::endl;
-    source_ofs_ << "}" << std::endl;
+    source_ofs_ << ">(" << return_expr << ");\n";
+    source_ofs_ << "}\n";
 }
 
 /**

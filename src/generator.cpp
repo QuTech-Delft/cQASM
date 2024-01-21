@@ -1,6 +1,5 @@
 #include "generator.hpp"
 
-#include <iostream>  // endl
 #include <stdexcept>  // invalid_argument, runtime_error
 
 
@@ -30,9 +29,9 @@ void register_into(resolver::FunctionTable &table) {
         source_ofs_ << "\"" << func.cqasm_name << "\", ";
         source_ofs_ << "types::from_spec(\"" << func.cqasm_args << "\"), ";
         source_ofs_ << func.cpp_name;
-        source_ofs_ << ");" << std::endl;
+        source_ofs_ << ");\n";
     }
-    source_ofs_ << std::endl << "}" << std::endl;
+    source_ofs_ << "}\n";
 }
 
 /**
@@ -42,8 +41,8 @@ void register_into(resolver::FunctionTable &table) {
  */
 void Generator::generate_impl_header(const Function &func) {
     auto proto = "values::Value " + func.cpp_name + "(const values::Values &v)";
-    header_ofs_ << proto << ";" << std::endl;
-    source_ofs_ << std::endl << proto << " {" << std::endl;
+    header_ofs_ << proto << ";\n";
+    source_ofs_ << "\n" << proto << " {\n";
     funcs_.push_back(func);
 }
 
@@ -121,20 +120,7 @@ namespace )" << version_ << R"( {
 namespace functions {
 
 /**
- * Division that always rounds down (towards negative infinity), like Python's
- * integer division. Because rounding to zero is a useless mechanic.
- */
-static int64_t div_floor(int64_t a, int64_t b) {
-    int64_t res = a / b;
-    int64_t rem = a % b;
-    // Correct division result downwards if up-rounding happened,
-    // (for non-zero remainder of sign different than the divisor).
-    int64_t corr = (rem != 0 && ((rem < 0) != (b < 0)));
-    return res - corr;
-}
-
-/**
- * Modulo to go along with div_floor.
+ * Modulo.
  */
 static int64_t mod_floor(int64_t a, int64_t b) {
     int64_t rem = a % b;
@@ -143,7 +129,6 @@ static int64_t mod_floor(int64_t a, int64_t b) {
     }
     return rem;
 }
-
 )";
 }
 
