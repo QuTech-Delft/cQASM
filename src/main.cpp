@@ -30,7 +30,6 @@ void generate_common_functions(func_gen::Generator* generator) {
     generator->generate_const_scalar_op("operator*", 'i', "ii", "a * b");
     generator->generate_const_scalar_op("operator/", 'c', "cc", "a / b");
     generator->generate_const_scalar_op("operator/", 'r', "rr", "a / b");
-    generator->generate_const_scalar_op("operator//", 'i', "ii", "div_floor(a, b)");
     generator->generate_const_scalar_op("operator%", 'i', "ii", "mod_floor(a, b)");
     generator->generate_const_scalar_op("operator**", 'c', "cc", "std::pow(a, b)");
     generator->generate_const_scalar_op("operator**", 'r', "rr", "std::pow(a, b)");
@@ -54,7 +53,6 @@ void generate_common_functions(func_gen::Generator* generator) {
     generator->generate_const_scalar_op("operator|", 'i', "ii", "a | b");
     generator->generate_const_scalar_op("operator<<", 'i', "ii", "a << b");
     generator->generate_const_scalar_op("operator>>", 'i', "ii", "a >> b");
-    generator->generate_const_scalar_op("operator>>>", 'i', "ii", "(int64_t)(((uint64_t)a) >> b)");
 
     // Logical operators
     generator->generate_const_scalar_op("operator!", 'b', "b", "!a");
@@ -102,6 +100,10 @@ void generate_common_functions(func_gen::Generator* generator) {
 void generate_v1x_specific_functions(func_gen::Generator* generator) {
     // Basic scalar arithmetic operators
     generator->generate_const_scalar_op("operator+", 's', "ss", "a + b");
+    generator->generate_const_scalar_op("operator//", 'i', "ii", "div_floor(a, b)");
+
+    // Bitwise operators
+    generator->generate_const_scalar_op("operator>>>", 'i', "ii", "(int64_t)(((uint64_t)a) >> b)");
 }
 
 
