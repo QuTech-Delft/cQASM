@@ -40,7 +40,7 @@ protected:
     /**
      * Generates the function that registers the functions in a FunctionTable.
      */
-    void generate_register_function();
+    void generate_register_default_functions_into();
 
     /**
      * Generates the function header in both the header and source file.

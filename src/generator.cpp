@@ -9,20 +9,20 @@
 namespace func_gen {
 
 /**
- * Generates the function that registers the functions in a FunctionTable.
+ * Generates the function that registers the default functions in a FunctionTable.
  */
-void Generator::generate_register_function() {
+void Generator::generate_register_default_functions_into() {
     header_ofs_ << R"(
 /**
  * Registers a bunch of functions usable during constant propagation into the given function table.
  */
-void register_into(resolver::FunctionTable &table);
+void register_default_functions_into(resolver::FunctionTable &table);
 )";
     source_ofs_ << R"(
 /**
  * Registers a bunch of functions usable during constant propagation into the given function table.
  */
-void register_into(resolver::FunctionTable &table) {
+void register_default_functions_into(resolver::FunctionTable &table) {
 )";
     for (const auto &func : funcs_) {
         source_ofs_ << "    table.add(";
@@ -136,7 +136,7 @@ static int64_t mod_floor(int64_t a, int64_t b) {
  * Finishes writing the header & source file, then destroys the generator.
  */
 Generator::~Generator() {
-    generate_register_function();
+    generate_register_default_functions_into();
     auto footer = R"(
 } // namespace functions
 } // namespace )" + version_ + R"(
