@@ -71,12 +71,12 @@ void Generator::generate_const_scalar_op(
 Generator::Generator(
     const std::string &header_filename,
     const std::string &source_filename,
-    std::string version
+    std::string_view version
 ) :
-    funcs_(),
-    header_ofs_(header_filename),
-    source_ofs_(source_filename),
-    version_(std::move(version))
+    funcs_{},
+    header_ofs_{ header_filename },
+    source_ofs_{ source_filename },
+    version_{ version }
 {
     // Check that the files were opened properly.
     if (!header_ofs_.is_open()) {

@@ -4,6 +4,7 @@
 
 #include <fstream>
 #include <string>
+#include <string_view>
 #include <vector>
 
 
@@ -85,7 +86,7 @@ public:
     Generator(
         const std::string &header_filename,
         const std::string &source_filename,
-        std::string version);
+        std::string_view version);
 
     /**
      * Finishes writing the header & source file, then destroys the generator.

@@ -2,13 +2,15 @@
 
 #include "../generator.hpp"
 
+#include <string_view>
+
 
 /**
  * Namespace for the \ref func-gen program.
  */
 namespace func_gen {
 
-constinit const std::string v1x_version{ "v1x" };
+constinit const std::string_view v1x_version{ "v1x" };
 
 /**
  * Generator class.
