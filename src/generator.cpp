@@ -101,6 +101,7 @@ Generator::Generator(
 namespace cqasm {
 namespace )" << version_ << R"( {
 namespace functions {
+
 )";
     source_ofs_ << R"(
 /** \file
