@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [ 0.1.2 ] - [ 2024-01-24 ]
+
+### Added
+- v1x and v3x generators
+
+### Changed
+- C++ version to C++23
+
+### Removed
+- `build_tests` option from conan profiles
+
 ## [ 0.1.1 ] - [ 2024-01-12 ]
 
 ### Added
