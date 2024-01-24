@@ -21,7 +21,7 @@ target_include_directories(${PROJECT_NAME}
 )
 
 target_compile_features(${PROJECT_NAME} PRIVATE
-    cxx_std_23
+    cxx_std_20
 )
 
 # fPIC: otherwise some weirdness happens with pthreads or something when linking statically.
