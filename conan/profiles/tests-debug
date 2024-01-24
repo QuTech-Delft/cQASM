@@ -1,7 +1,7 @@
 include(default)
 
 [settings]
-compiler.cppstd=23
+compiler.cppstd=20
 func-gen/*:build_type=Debug
 
 [options]
