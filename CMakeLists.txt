@@ -12,21 +12,21 @@ include(GNUInstallDirs)
 # Include the generate_tree functions
 include(cmake/generate_funcs.cmake)
 
-add_executable(func-gen)
+add_executable(${PROJECT_NAME})
 
 add_subdirectory(src)
 
-target_include_directories(func-gen
+target_include_directories(${PROJECT_NAME}
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include/"
 )
 
-target_compile_features(func-gen PRIVATE
-    cxx_std_11
+target_compile_features(${PROJECT_NAME} PRIVATE
+    cxx_std_23
 )
 
 # fPIC: otherwise some weirdness happens with pthreads or something when linking statically.
 if(CMAKE_COMPILER_IS_GNUCXX)
-    target_compile_options(func-gen PRIVATE
+    target_compile_options(${PROJECT_NAME} PRIVATE
         -Wall -Wextra -Werror -Wfatal-errors
         -fPIC
         -Wno-error=deprecated-declarations
@@ -34,7 +34,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
         -Wno-error=sign-compare
     )
 elseif("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
-    target_compile_options(func-gen PRIVATE
+    target_compile_options(${PROJECT_NAME} PRIVATE
         -Wall -Wextra -Werror -Wfatal-errors
         -fPIC
         -Wno-error=sign-compare
@@ -42,7 +42,7 @@ elseif("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
         -Wno-error=unused-but-set-variable
     )
 elseif(MSVC)
-    target_compile_options(func-gen PRIVATE
+    target_compile_options(${PROJECT_NAME} PRIVATE
         /WX
         /D_CRT_NONSTDC_NO_DEPRECATE
         /D_CRT_SECURE_NO_WARNINGS
@@ -68,15 +68,14 @@ if(ASAN_ENABLED)
     endif()
 endif()
 
-
 #=============================================================================#
 # Installation                                                                #
 #=============================================================================#
 
 # Install the generator tool only if this is the top level project
-if (${CMAKE_PROJECT_NAME} STREQUAL func-gen)
+if (${CMAKE_PROJECT_NAME} STREQUAL ${PROJECT_NAME})
     install(
-        TARGETS func-gen
+        TARGETS ${PROJECT_NAME}
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     )
     install(
@@ -85,6 +84,5 @@ if (${CMAKE_PROJECT_NAME} STREQUAL func-gen)
         FILES_MATCHING PATTERN "*.hpp"
     )
 endif()
-
 
 endif() # NOT TARGET ${PROJECT_NAME}
