@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [ 0.1.3 ] - [ 2024-01-24 ]
+
+### Added
+-
+
+### Changed
+- C++ version to C++20
+
+### Removed
+-
+
 ## [ 0.1.2 ] - [ 2024-01-24 ]
 
 ### Added
