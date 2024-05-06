@@ -1,0 +1,127 @@
+__pycache__/
+*.py[cod]
+*$py.class
+env
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+doc/qtools/gcopy
+doc/qtools/gdeebnf
+doc/qtools/gdeempty
+doc/qtools/gsample
+doc/qtools/gsqueeze
+doc/qtools/gstartfollow
+doc/qtools/gstats
+*.bak
+
+# Bin
+bin
+*/bin
+*/bin/*
+
+# Build
+pybuild/
+build/
+cbuild/
+cmake-build-*
+
+# Testing
+Testing
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Flex and Bison generated sources
+*.tab.*
+*.yy.*
+log
+*.dot
+*.output
+*.png
+
+# SWIG generated sources
+library/**/*_swig*
+
+# IDE's
+.project
+.cproject
+
+# conan
+/test_package/build/
+/test_package/CMakeUserPresets.json
+CMakeUserPresets.json
+conan.lock
+conanbuildinfo.txt
+conaninfo.txt
+graph_info.json
+conan_host_profile
+conan_provider.cmake
+
+# res
+ast.actual.txt
+ast.actual.json
+semantic.3.0.actual.txt
+semantic.3.0.actual.json
+
+*/*/CMakeFiles
+*/CMakeFiles/
+.idea/
+CMakeFiles/
+CTestTestfile.cmake
+Changes.patch
+DartConfiguration.tcl
+Makefile
+cmake-build-*/
+cmake_install.cmake
+src/*.cmake
+src/*/*.cmake
+tags
+test/*.cmake
+test/v3x/*.cmake
+test/v3x/cpp/*.cmake
