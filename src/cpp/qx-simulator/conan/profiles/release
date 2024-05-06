@@ -1,0 +1,11 @@
+include(default)
+
+[settings]
+compiler.cppstd=23
+build_type=Release
+
+[options]
+qx/*:asan_enabled=False
+qx/*:build_python=False
+qx/*:build_tests=False
+qx/*:cpu_compatibility_mode=False
