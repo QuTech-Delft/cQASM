@@ -1,0 +1,36 @@
+name: Compile tree-gen
+description: Install tools and compile tree-gen
+inputs:
+  build_type:
+    required: true
+    description: Is the build a debug or release version
+  conan_profile:
+    required: true
+    description: Which conan profile to use
+  shell:
+    required: true
+    description: Which shell to use for the `run` command
+
+runs:
+  using: composite
+  steps:
+    - name: Install conan
+      run: |
+        pipx install conan
+      shell: ${{ inputs.shell }}
+    - name: Get latest CMake
+      uses: lukka/get-cmake@latest
+    - name: Configure and build
+      run: |
+        conan profile detect --force
+        pr=${{ inputs.conan_profile }}
+        lowercase_pr=$(echo ${pr} | tr '[:upper:]' '[:lower:]')
+        conan build . -pr:h=${lowercase_pr} -pr:b=${lowercase_pr} -b missing
+      shell: ${{ inputs.shell }}
+    - name: Test
+      working-directory: build/${{ inputs.build_type }}
+      # Do not run tests in parallel as some of them depend on outputs from others
+      # E.g., directory-example-py depends on directory-example
+      run: |
+        ctest -C ${{ inputs.build_type }} --output-on-failure
+      shell: ${{ inputs.shell }}
