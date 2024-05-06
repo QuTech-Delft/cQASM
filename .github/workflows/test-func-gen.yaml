@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - uses: ./.github/actions/cpp-tests
+      - uses: ./.github/actions/cpp-tests-func-gen
         with:
           build_type: ${{ matrix.build_type }}
           c_compiler: ${{ matrix.c_compiler }}
@@ -47,7 +47,7 @@ jobs:
           brew install bison flex
           echo "/usr/local/opt/bison/bin" >> $GITHUB_PATH
           echo "/usr/local/opt/flex/bin" >> $GITHUB_PATH
-      - uses: ./.github/actions/cpp-tests
+      - uses: ./.github/actions/cpp-tests-func-gen
         with:
           build_type: ${{ matrix.build_type }}
           conan_profile: tests-${{ matrix.build_type }}-apple_clang-macos-x64
@@ -73,7 +73,7 @@ jobs:
             ${{ runner.os }}-chocolatey-
       - name: Install dependencies
         run: choco install winflexbison3 --version 2.5.24.20210105
-      - uses: ./.github/actions/cpp-tests
+      - uses: ./.github/actions/cpp-tests-func-gen
         with:
           build_type: ${{ matrix.build_type }}
           conan_profile: tests-${{ matrix.build_type }}-msvc-windows-x64
@@ -99,7 +99,7 @@ jobs:
         run: |
           apt-get update
           apt-get install -y bison flex
-      - uses: ./.github/actions/cpp-tests
+      - uses: ./.github/actions/cpp-tests-func-gen
         with:
           build_type: Release
           conan_profile: tests-${{ matrix.build_type }}-gcc-linux-arm64
@@ -123,7 +123,7 @@ jobs:
           echo "$(brew --prefix bison)/bin" >> $GITHUB_PATH
           echo "$(brew --prefix flex)/bin" >> $GITHUB_PATH
         shell: bash
-      - uses: ./.github/actions/cpp-tests
+      - uses: ./.github/actions/cpp-tests-func-gen
         with:
           build_type: Release
           conan_profile: tests-${{ matrix.build_type }}-apple_clang-macos-arm64

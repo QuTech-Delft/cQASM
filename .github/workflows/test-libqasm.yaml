@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - uses: ./.github/actions/cpp-tests
+      - uses: ./.github/actions/cpp-tests-libqasm
         with:
           build_type: Release
           conan_profile_host: conan/profiles/release-gcc-linux-x64-shared
@@ -37,7 +37,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - uses: ./.github/actions/cpp-tests
+      - uses: ./.github/actions/cpp-tests-libqasm
         with:
           build_type: ${{ matrix.build_type }}
           conan_profile_host: conan/profiles/tests-${{ matrix.build_type }}-${{ matrix.compiler }}-linux-x64
@@ -55,7 +55,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - uses: ./.github/actions/cpp-tests
+      - uses: ./.github/actions/cpp-tests-libqasm
         with:
           build_type: ${{ matrix.build_type }}
           conan_profile_host: conan/profiles/tests-${{ matrix.build_type }}-apple_clang-macos-x64
@@ -73,7 +73,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - uses: ./.github/actions/cpp-tests
+      - uses: ./.github/actions/cpp-tests-libqasm
         with:
           build_type: ${{ matrix.build_type }}
           conan_profile_host: conan/profiles/tests-${{ matrix.build_type }}-msvc-windows-x64
@@ -104,7 +104,7 @@ jobs:
       - name: Add Conan to path
         run: |
           echo "${HOME}/.local/bin" >> $GITHUB_PATH
-      - uses: ./.github/actions/cpp-tests
+      - uses: ./.github/actions/cpp-tests-libqasm
         with:
           build_type: ${{ matrix.build_type }}
           conan_profile_host: conan/profiles/tests-${{ matrix.build_type }}-gcc-linux-arm64
@@ -130,7 +130,7 @@ jobs:
           brew install java
           echo "$(brew --prefix java)/bin" >> $GITHUB_PATH
         shell: bash
-      - uses: ./.github/actions/cpp-tests
+      - uses: ./.github/actions/cpp-tests-libqasm
         with:
           build_type: ${{ matrix.build_type }}
           conan_profile_host: conan/profiles/tests-${{ matrix.build_type }}-apple_clang-macos-arm64
@@ -195,7 +195,7 @@ jobs:
         run: |
           echo "LIBQASM_BUILD_TYPE=Debug" >> $GITHUB_ENV
         shell: bash
-      - uses: ./.github/actions/python-tests
+      - uses: ./.github/actions/python-tests-libqasm
         with:
           shell: bash
 
@@ -213,7 +213,7 @@ jobs:
         run: |
           echo "LIBQASM_BUILD_TYPE=Debug" >> $GITHUB_ENV
         shell: bash
-      - uses: ./.github/actions/python-tests
+      - uses: ./.github/actions/python-tests-libqasm
         with:
           shell: bash
 
@@ -227,7 +227,7 @@ jobs:
         run: |
           echo "LIBQASM_BUILD_TYPE=Release" >> $env:GITHUB_ENV
         shell: powershell
-      - uses: ./.github/actions/python-tests
+      - uses: ./.github/actions/python-tests-libqasm
         with:
           shell: bash
 
