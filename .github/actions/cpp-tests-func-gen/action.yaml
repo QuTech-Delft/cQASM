@@ -24,6 +24,7 @@ runs:
       uses: lukka/get-cmake@latest
     - name: Configure and build
       run: |
+        cd src/cpp/func-gen
         conan profile detect --force
         conan_profile=${{ inputs.conan_profile }}
         lowercase_conan_profile=$(echo ${conan_profile} | tr '[:upper:]' '[:lower:]')
